@@ -38,4 +38,20 @@ function display_price_in_variation_option_name( $term ) {
 
 }
 
+//* Force all products to one page - eliminating pagination 
+add_filter( 'loop_shop_per_page', create_function( '$cols', 'return -1;' ), 20 );
+
+//* Remove tabs from product details page
+add_filter( 'woocommerce_product_tabs', 'woo_remove_product_tabs', 98 );
+function woo_remove_product_tabs( $tabs ) {
+
+	//comment out what you want to hide
+	unset( $tabs['description'] ); 
+	unset( $tabs['reviews'] );
+	unset( $tabs['additional_information'] );
+
+	return $tabs;
+
+}
+
 ?>
