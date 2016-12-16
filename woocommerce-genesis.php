@@ -103,4 +103,24 @@ function prefix_facetwp_facet_html( $output, $params ) {
 
 add_filter( 'facetwp_facet_html', 'prefix_facetwp_facet_html', 10, 2 );
 
+// Add next and previous buttons on singular products
+add_action( 'woocommerce_before_single_product', 'prefix_prev_next_product' );
+// and if you also want them at the bottom...
+add_action( 'woocommerce_after_single_product', 'prefix_prev_next_product' );
+
+function prefix_prev_next_product() {
+
+	echo '<div class="prev_next_buttons">';
+
+	// 'product_cat' will make sure to return next/prev from current category
+	$previous = next_post_link( '%link', '&larr; PREVIOUS', true, ' ', 'product_cat' );
+	$next     = previous_post_link( '%link', 'NEXT &rarr;', true, ' ', 'product_cat' );
+
+	echo $previous;
+	echo $next;
+
+	echo '</div>';
+
+}
+
 ?>
